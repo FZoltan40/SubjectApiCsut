@@ -24,5 +24,15 @@
         "StatusCode": 200
       }
     ]
+  },
+  {
+    "ContainingType": "SubjectApi.Controllers.SubjectController",
+    "Method": "Get",
+    "RelativePath": "subjects",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
   }
 ]

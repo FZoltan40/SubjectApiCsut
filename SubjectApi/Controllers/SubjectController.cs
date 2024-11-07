@@ -31,5 +31,15 @@ namespace SubjectApi.Controllers
             }
             return BadRequest();
         }
+
+        [HttpGet]
+        public ActionResult Get()
+        {
+            using (var context = new SubjectDbContext())
+            {
+
+                return Ok(context.Subjects.ToList());
+            }
+        }
     }
 }
