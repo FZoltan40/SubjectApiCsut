@@ -58,5 +58,29 @@ namespace SubjectApi.Controllers
 
             }
         }
+
+        [HttpPut("{id}")]
+        public ActionResult Put(Guid id, UpdateSubjectDto updateSubjectDto)
+        {
+            using (var context = new SubjectDbContext())
+            {
+                var existingSubject = context.Subjects.FirstOrDefault(x => x.Id == id);
+
+                if (existingSubject != null)
+                {
+                    existingSubject.SubjectName = updateSubjectDto.SubjectName;
+                    existingSubject.NumberOfHours = updateSubjectDto.NumberOfHours;
+                    existingSubject.Description = updateSubjectDto.Description;
+                    existingSubject.LastUpdatedTime = DateTime.Now;
+                    context.Subjects.Update(existingSubject);
+                    context.SaveChanges();
+
+                    return Ok(existingSubject);
+                }
+
+                return NotFound(new { message = "Nem találtam egyezést az adatbázisban." });
+
+            }
+        }
     }
 }
