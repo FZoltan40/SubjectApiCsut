@@ -82,5 +82,25 @@ namespace SubjectApi.Controllers
 
             }
         }
+
+        [HttpDelete("{id}")]
+        public ActionResult Delete(Guid id)
+        {
+            using (var context = new SubjectDbContext())
+            {
+                var existingSubject = context.Subjects.FirstOrDefault(x => x.Id == id);
+
+                if (existingSubject != null)
+                {
+
+                    context.Subjects.Remove(existingSubject);
+                    context.SaveChanges();
+                    return Ok(new { meassage = "Sikeres törlés!" });
+                }
+
+                return NotFound(new { message = "Nem találtam egyezést az adatbázisban." });
+
+            }
+        }
     }
 }
