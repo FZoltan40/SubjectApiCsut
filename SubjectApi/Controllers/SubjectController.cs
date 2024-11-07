@@ -41,5 +41,22 @@ namespace SubjectApi.Controllers
                 return Ok(context.Subjects.ToList());
             }
         }
+
+        [HttpGet("{id}")]
+        public ActionResult GetById(Guid id)
+        {
+            using (var context = new SubjectDbContext())
+            {
+                var subject = context.Subjects.FirstOrDefault(x => x.Id == id);
+
+                if (subject != null)
+                {
+                    return Ok(subject);
+                }
+
+                return NotFound(new { message = "Nem találtam egyezést az adatbázisban." });
+
+            }
+        }
     }
 }
